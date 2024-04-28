@@ -9,7 +9,7 @@ tasks_router = APIRouter(prefix="/tasks", tags=["Управление задач
 async def get_all_or_exact_post(task_id:int=0):
     if task_id:
         exact_task = get_all_or_exact_task_db(task_id)
-        return {"status": 1, "message": exact_task}
+        return {"status": 1, "message": exact_task or "Ошибка"}
     return {"status": 0, "message": "Ошибка"}
 
 # изменить пост
@@ -30,5 +30,5 @@ async def delete_user_task(request:Request):
     task_id = data.get('task_id')
     if task_id:
         delete_exact_task_db(post_id=task_id)
-        return {"status": 1, "message": "Фото успешно удалено"}
+        return {"status": 1, "message": "Успешно удалено"}
     return {"status": 0, "message": "Ошибка"}
