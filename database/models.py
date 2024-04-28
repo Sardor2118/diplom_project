@@ -11,7 +11,7 @@ class User(Base):
     password = Column(String)
     reg_date = Column(String)
 
-class UserPost(Base):
+class UserTask(Base):
     __tablename__ = 'user_posts'
     id = Column(Integer, autoincrement=True, primary_key=True)
     main_text = Column(String, nullable=True)
@@ -26,4 +26,4 @@ class Comment(Base):
     text = Column(String, nullable=False)
     reg_date = Column(DateTime)
     user_fk = relationship(User, lazy="subquery")
-    post_fk = relationship(UserPost, lazy="subquery")
+    post_fk = relationship(UserTask, lazy="subquery")

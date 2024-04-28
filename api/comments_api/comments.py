@@ -1,5 +1,5 @@
 from fastapi import Request, APIRouter
-from database.postservice import (get_exact_post_comment_db, public_comment_db,
+from database.taskservice import (get_exact_task_comment_db, public_comment_db,
                                   change_comment_text_db, delete_comment_db)
 comment_router = APIRouter(prefix="/comments", tags=["Управление комментариями"])
 @comment_router.post("/api/comment")
@@ -19,7 +19,7 @@ async def get_exact_post_comments(request: Request):
     data = await request.json()
     post_id = data.get("post_id")
     if post_id:
-        comments = get_exact_post_comment_db(post_id=post_id)
+        comments = get_exact_task_comment_db(post_id=post_id)
         return {"status": 1, "message": comments}
 
 # изменить комментарий
