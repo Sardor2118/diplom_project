@@ -10,7 +10,7 @@ def register_user_db(username, email, password, phone_number):
     new_user = User(username=username, email=email, password=password, phone_number=phone_number, reg_date=datetime.now())
     db.add(new_user)
     db.commit()
-    return new_user.idd
+    return new_user.id
 
 # проверка на наличие юзера в бд
 def check_user_db(phone_number, email):
@@ -36,7 +36,7 @@ def profile_info_db(user_id):
     db = next(get_db())
     all_info = db.query(User).filter_by(id=user_id).first()
     if all_info:
-        return (all_info.email, all_info.name, all_info.phone_number, all_info.reg_date)
+        return (all_info.email, all_info.username, all_info.phone_number, all_info.reg_date)
     return "Пользователь не найден"
 
 # изменение данных
@@ -48,8 +48,8 @@ def change_user_data(user_id, changeble_info, new_data):
             all_info.email = new_data
         elif changeble_info == 'phone_number':
             all_info.phone_number = new_data
-        elif changeble_info == 'name':
-            all_info.name = new_data
+        elif changeble_info == 'username':
+            all_info.username = new_data
         elif changeble_info == 'password':
             all_info.password == new_data
         db.commit()

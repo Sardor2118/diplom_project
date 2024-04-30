@@ -10,24 +10,18 @@ class User(BaseModel):
     email: str
     phone_number: str
     password: str
-    user_city: str
 
 # публикация задачи
 @tasks_router.post("/api/tasks")
-async def public_comment(user: str, text: str):
-    data = await request.json()
-    task_id = data.get("task_id")
-    user_id = data.get("user_id")
-    text = data.get("main_text")
-    if user_id and text and task_id:
-        public_task_db(user_id=user_id, task_id=task_id, text=text)
+async def public_comment(user_id: str, main_text: str, task_id: int):
+    if user_id and main_text and task_id:
+        public_task_db(user_id=user_id, task_id=task_id, main_text=main_text)
         return {"status": 1, "message": "Успешно опубликовано"}
     return {"status": 0, "message": "Ошибка"}
 
-
 # получить определенные или все посты
 @tasks_router.get("/api/tasks")
-async def get_all_or_exact_task(task_id:int=0):
+async def get_all_or_exact_task(task_id: int= 0):
     if task_id:
         exact_task = get_all_or_exact_task_db(task_id)
         return {"status": 1, "message": exact_task or "Ошибка"}
@@ -35,20 +29,15 @@ async def get_all_or_exact_task(task_id:int=0):
 
 # изменить пост
 @tasks_router.put("/api/tasks")
-async def change_user_task(request:Request):
-    data = request.json()
-    task_id = data.get('task_id')
-    text = data.get('text')
-    if task_id and text:
-        change_task_text_db(task_id=task_id, text=text)
+async def change_user_task(task_id: int, new_text: str):
+    if task_id and new_text:
+        change_task_text_db(task_id=task_id, new_text=new_text)
         return {"status": 1, "message": "Успешно изменено"}
     return {"status": 0, "message": "Ошибка"}
 
 # удаление поста
 @tasks_router.delete("/api/tasks")
-async def delete_user_task(request:Request):
-    data = await request.json()
-    task_id = data.get('task_id')
+async def delete_user_task(task_id: int):
     if task_id:
         delete_exact_task_db(task_id=task_id)
         return {"status": 1, "message": "Успешно удалено"}

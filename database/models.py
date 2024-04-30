@@ -14,6 +14,7 @@ class User(Base):
 class UserTask(Base):
     __tablename__ = 'user_posts'
     id = Column(Integer, autoincrement=True, primary_key=True)
+    task_id = Column(Integer, nullable=True)
     main_text = Column(String, nullable=True)
     user_id = Column(Integer, ForeignKey("users.id"))
     reg_date = Column(DateTime)

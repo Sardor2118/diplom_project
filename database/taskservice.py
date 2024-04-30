@@ -29,9 +29,9 @@ def delete_exact_task_db(task_id):
         return "Успешно удалено"
     return "Ошибка"
 
-def public_comment_db(task_id, user_id, text):
+def public_comment_db(task_id, user_id, main_text):
     db = next(get_db())
-    new_comment = Comment(post_id=task_id, user_id=user_id, text=text, reg_date=datetime.now())
+    new_comment = Comment(post_id=task_id, user_id=user_id, text=main_text, reg_date=datetime.now())
     db.add(new_comment)
     db.commit()
     return "Коментарии успешно опубликовано"
@@ -60,9 +60,9 @@ def delete_comment_db(comment_id):
     return "Ошибка"
 
 # добавление задачи
-def public_task_db(task_id, user_id, text):
+def public_task_db(task_id, user_id, main_text):
     db = next(get_db())
-    new_comment = Comment(post_id=task_id, user_id=user_id, text=text, reg_date=datetime.now())
+    new_comment = UserTask(task_id=task_id, user_id=user_id, main_text=main_text, reg_date=datetime.now())
     db.add(new_comment)
     db.commit()
     return "Задача успешно опубликовано"
