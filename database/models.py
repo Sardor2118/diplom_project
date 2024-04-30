@@ -10,11 +10,11 @@ class User(Base):
     phone_number = Column(String, nullable=False, unique=True)
     password = Column(String)
     reg_date = Column(String)
+    tasks = relationship("UserTask", back_populates="user_fk")
 
 class UserTask(Base):
     __tablename__ = 'user_posts'
     id = Column(Integer, autoincrement=True, primary_key=True)
-    task_id = Column(Integer, nullable=True)
     main_text = Column(String, nullable=True)
     user_id = Column(Integer, ForeignKey("users.id"))
     reg_date = Column(DateTime)
@@ -22,7 +22,7 @@ class UserTask(Base):
 class Comment(Base):
     __tablename__ = 'comments'
     id = Column(Integer, autoincrement=True, primary_key=True)
-    post_id = Column(Integer, ForeignKey("user_posts.id"))
+    task_id = Column(Integer, ForeignKey("user_posts.id"))
     user_id = Column(Integer, ForeignKey("users.id"))
     text = Column(String, nullable=False)
     reg_date = Column(DateTime)
