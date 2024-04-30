@@ -5,21 +5,21 @@ comment_router = APIRouter(prefix="/comments", tags=["Управление ко�
 @comment_router.post("/api/comment")
 async def public_comment(request: Request):
     data = await request.json()
-    post_id = data.get("post_id")
+    task_id = data.get("task_id")
     user_id = data.get("user_id")
     text = data.get("main_text")
-    if user_id and text and post_id:
-        public_comment_db(user_id=user_id, post_id=post_id, text=text)
+    if user_id and text and task_id:
+        public_comment_db(user_id=user_id, task_id=task_id, text=text)
         return {"status": 1, "message": "Успешно опубликовано"}
     return {"status": 0, "message": "Ошибка"}
 
 # получение комментов определенного поста
 @comment_router.get("/api/comment")
-async def get_exact_post_comments(request: Request):
+async def get_exact_task_comments(request: Request):
     data = await request.json()
-    post_id = data.get("post_id")
-    if post_id:
-        comments = get_exact_task_comment_db(post_id=post_id)
+    task_id = data.get("task_id")
+    if task_id:
+        comments = get_exact_task_comment_db(task_id=task_id)
         return {"status": 1, "message": comments}
 
 # изменить комментарий

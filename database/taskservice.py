@@ -59,7 +59,13 @@ def delete_comment_db(comment_id):
         return "Успешно удалено"
     return "Ошибка"
 
-
+# добавление задачи
+def public_task_db(task_id, user_id, text):
+    db = next(get_db())
+    new_comment = Comment(post_id=task_id, user_id=user_id, text=text, reg_date=datetime.now())
+    db.add(new_comment)
+    db.commit()
+    return "Задача успешно опубликовано"
 
 
 

@@ -6,9 +6,9 @@ services:
       - uvicorn
       - main:app
       - --host=0.0.0.0
-      - --port=1234
+      - --port=2118
     ports:
-      - "1234:1234"
+      - "2118:2118"
     volumes:
       - .:/code
     depends_on:
