@@ -47,8 +47,19 @@ async def login_user(email: str, password: str):
             return {"status": 1, "message": login_checker}
         return {"status": 0, "message": login_checker}
     return {"status": 0, "message": "Invalid email"}
-# запрос на изменение информации о юзере
+#запрос на изменение информации о юзере
 @user_router.put("/api/change_profile")
 async def change_user_profile(user_id: int, changeable_info: str, new_data: str):
     data = change_user_data(user_id=user_id, changeable_info=changeable_info, new_data=new_data)
-    return {"status":1, "message": data}
+    return {"status": 1, "message": data}
+
+# @user_router.put("/api/change_profile")
+# async def change_user_profile(user_id: int, changeable_info: str, new_data: str):
+#     data = change_user_data(user_id=user_id, changeable_info=changeable_info, new_data=new_data)
+#     if data:
+#         try:
+#             change_user = change_user_data(user_id, changeable_info, new_data=new_data)
+#             return {"status": 1, "user_id": change_user or "Успешно изменени"}
+#         except Exception:
+#             return {"status": 0, "message":  "Ошибка"}
+#     return {"status": 0, "message": "Invalid email or phone number"}
