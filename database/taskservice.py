@@ -29,18 +29,17 @@ def delete_exact_task_db(UserTask_id):
         return "Успешно удалено"
     return "Ошибка"
 
-def public_comment_db(UserTask_id, user_id, main_text):
+def public_comment_db(user_id, main_text):
     db = next(get_db())
-    new_comment = Comment(UserTask_id=UserTask_id, user_id=user_id, text=main_text, reg_date=datetime.now())
+    new_comment = UserTask(user_id=user_id, main_text=main_text, reg_date=datetime.now())
     db.add(new_comment)
     db.commit()
     return "Коментарии успешно опубликовано"
 def get_exact_task_comment_db(UserTask_id):
     db = next(get_db())
-    exact_task_comments = db.query(UserTask).filter_by(post_id=UserTask_id).all()
-    if exact_task_comments:
-        return exact_task_comments
-    return []
+    if UserTask_id == 0:
+        return db.query(UserTask).all()
+    return db.query(UserTask).filter_by(id=UserTask_id).first()
 def change_comment_text_db(comment_id, new_text):
     db = next(get_db())
     exact_task = db.query(UserTask).filter_by(id=comment_id).first()
