@@ -43,3 +43,4 @@ async def delete_user_task(UserTask_id: int):
         delete_exact_task_db(UserTask_id=UserTask_id)
         return {"status": 1, "message": "Успешно удалено"}
     return {"status": 0, "message": "Ошибка"}
+#
