@@ -13,6 +13,7 @@ def create_access_token(data:dict):
     encode_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encode_jwt
 
+
 # проверка токена
 def verify_token(token:str):
     try:

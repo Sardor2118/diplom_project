@@ -82,3 +82,4 @@ async def change_user_profile(user_id: int, changeable_info: str, new_data: str)
 #         except Exception:
 #             return {"status": 0, "message":  "Ошибка"}
 #     return {"status": 0, "message": "Invalid email or phone number"}
+

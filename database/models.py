@@ -28,3 +28,4 @@ class Comment(Base):
     reg_date = Column(DateTime)
     user_fk = relationship(User, lazy="subquery")
     post_fk = relationship(UserTask, lazy="subquery")
+

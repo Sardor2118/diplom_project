@@ -76,5 +76,3 @@ def public_task_db(user_id, main_text):
 
 
 
-
-
